@@ -301,8 +301,8 @@ export default function DataTable() {
           }
           className="max-w-sm"
         />
+        {/* Dropdown to filter by status */}
         <div className="mt-2 flex flex-col gap-2 md:mt-0 md:flex-row lg:gap-4">
-          {/* Dropdown to filter by status */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
