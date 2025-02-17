@@ -12,7 +12,15 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Download,FileText, MoreHorizontal, Pause, Play } from "lucide-react"
+import { 
+  FaPlay, 
+  FaDownload, 
+  FaEllipsis,
+  FaPause, 
+  FaFileArrowDown, 
+  FaChevronDown, 
+  FaArrowsUpDown } 
+from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -95,7 +103,7 @@ const callRecordingsData: CallRecording[] = [
     transcriptUrl: "https://example.com/recording5.pdf",
   },
 ];
-const RecordingCell: React.FC<{ recordingUrl: string, transcriptUrl: string, invoice: string }> = ({ recordingUrl, transcriptUrl, invoice }) => {
+const RecordingCell = ({ recordingUrl, transcriptUrl, invoice }: { recordingUrl: string, transcriptUrl: string, invoice: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -136,12 +144,12 @@ const RecordingCell: React.FC<{ recordingUrl: string, transcriptUrl: string, inv
         <TabsContent value="recording" className="w-full">
           <div className="flex w-full items-center space-x-2">
             <Button variant="outline" size="sm" onClick={togglePlay}>
-              {isPlaying ? <Pause /> : <Play />}
+              {isPlaying ? <FaPause /> : <FaPlay />}
             </Button>
             <Progress value={progress} className="w-full" />
             <audio ref={audioRef} src={recordingUrl} onEnded={() => { setIsPlaying(false); setProgress(0); }} />
             <Button variant="outline" size="sm" onClick={() => console.log("Download recording:", recordingUrl)}>
-              <Download />
+              <FaDownload />
             </Button>
           </div>
         </TabsContent>
@@ -149,12 +157,12 @@ const RecordingCell: React.FC<{ recordingUrl: string, transcriptUrl: string, inv
         <TabsContent value="transcript" className="size-full overflow-auto">
           <div className="flex size-full items-center justify-between">
             <div className="flex items-center space-x-2">
-              <FileText />
+              <FaFileArrowDown />
               <span>{invoice}</span>
             </div>
             <Button variant="outline" size="sm" onClick={() => console.log("Download transcript:", transcriptUrl)}>
               Download transcript     
-              <Download />
+              <FaDownload />
             </Button>
           </div>
         </TabsContent>
@@ -199,7 +207,7 @@ export const columns: ColumnDef<CallRecording>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date
-          <ArrowUpDown className="ml-2 size-4" />
+          <FaArrowsUpDown className="ml-2 size-4" />
         </Button>
       );
     },
@@ -241,7 +249,7 @@ export const columns: ColumnDef<CallRecording>[] = [
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="size-8 p-0">
                 <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
+                <FaEllipsis />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -309,7 +317,7 @@ export default function DataTable() {
                 variant="outline"
                 className="w-fit justify-between bg-inherit"
               >
-                Filter by Status <ChevronDown className="size-4" />
+                Filter by Status <FaChevronDown className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
