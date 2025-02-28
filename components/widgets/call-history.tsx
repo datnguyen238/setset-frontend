@@ -13,14 +13,15 @@ import {
   VisibilityState,
 } from "@tanstack/react-table";
 import { useEffect, useRef, useState } from "react";
-import { 
-  FaArrowsUpDown,  FaChevronDown, 
-  FaDownload, 
+import {
+  FaArrowsUpDown,
+  FaChevronDown,
+  FaDownload,
   FaEllipsis,
-  FaFileArrowDown, 
-  FaPause, 
-  FaPlay } 
-from "react-icons/fa6";
+  FaFileArrowDown,
+  FaPause,
+  FaPlay,
+} from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -42,16 +43,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CallRecording } from "@/lib/types";
 
 import { DatePickerWithRange } from "../ui/date-picker";
+import { callRecordingsData } from "@/lib/sampleData";
 
 // Sample data for Call Recordings
 const callRecordingsData: CallRecording[] = [
@@ -103,6 +100,7 @@ const callRecordingsData: CallRecording[] = [
 ];
 
 const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: string, transcriptUrl: string, id: string }) => {
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -135,7 +133,10 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
 
   return (
     <div className="flex w-full flex-col items-center space-x-4">
-      <Tabs defaultValue="recording" className={isMobile ? "w-[400px]" : "w-full"}>
+      <Tabs
+        defaultValue="recording"
+        className={isMobile ? "w-[400px]" : "w-full"}
+      >
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="recording">Recording</TabsTrigger>
           <TabsTrigger value="transcript">Transcript</TabsTrigger>
@@ -147,8 +148,19 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
               {isPlaying ? <FaPause /> : <FaPlay />}
             </Button>
             <Progress value={progress} className="w-full" />
-            <audio ref={audioRef} src={recordingUrl} onEnded={() => { setIsPlaying(false); setProgress(0); }} />
-            <Button variant="outline" size="sm" onClick={() => console.log("Download recording:", recordingUrl)}>
+            <audio
+              ref={audioRef}
+              src={recordingUrl}
+              onEnded={() => {
+                setIsPlaying(false);
+                setProgress(0);
+              }}
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => console.log("Download recording:", recordingUrl)}
+            >
               <FaDownload />
             </Button>
           </div>
@@ -160,7 +172,11 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
               <FaFileArrowDown />
               <span>{id}</span>
             </div>
-            <Button variant="outline" size="sm" onClick={() => console.log("Download transcript:", transcriptUrl)}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => console.log("Download transcript:", transcriptUrl)}
+            >
               <FaDownload />
             </Button>
           </div>
@@ -217,7 +233,7 @@ export const columns: ColumnDef<CallRecording>[] = [
       const recording = row.original;
 
       return (
-        <div className="mt-auto flex size-full flex-col items-center pb-10"> 
+        <div className="mt-auto flex size-full flex-col items-center pb-10">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="size-8 p-0">
