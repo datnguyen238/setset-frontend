@@ -29,8 +29,8 @@ export default function Home() {
           <div className="flex flex-1 flex-col gap-10">
             <Metrics />
             <Appointments />
-            {/*<Faqs />
-          <DataTable /> */}
+            {/* <Faqs /> */}
+            <DataTable />
             <Footer />
           </div>
         </div>
