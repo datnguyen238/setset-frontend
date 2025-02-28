@@ -57,53 +57,52 @@ import { DatePickerWithRange } from "../ui/date-picker";
 const callRecordingsData: CallRecording[] = [
   {
     id: "1",
-    date: "2023-10-01",
-    invoice: "INV001",
-    status: "Booked",
+    date: "2025/02/10",
+    category: "Booking",
+    confidenceScore: 9.8,
     duration: "0:18",
-    recordingUrl:
-      "https://actions.google.com/sounds/v1/cartoon/rainstick_slow.ogg",
-    transcriptUrl: "https://example.com/recording2.pdf",
+    recordingUrl: "https://actions.google.com/sounds/v1/cartoon/rainstick_slow.ogg",
+    transcriptUrl: "https://example.com/recording1.pdf",
   },
   {
     id: "2",
-    date: "2023-10-02",
-    invoice: "INV002",
-    status: "Cancelled",
+    date: "2025/02/8",
+    category: "Cancellation",
+    confidenceScore: 9.9,
     duration: "0:50",
-    recordingUrl:
-      "https://actions.google.com/sounds/v1/ambiences/barnyard_with_animals.ogg",
+    recordingUrl: "https://actions.google.com/sounds/v1/ambiences/barnyard_with_animals.ogg",
     transcriptUrl: "https://example.com/recording2.pdf",
   },
   {
     id: "3",
-    date: "2023-10-03",
-    invoice: "INV003",
-    status: "Cancelled",
+    date: "2025/02/18",
+    category: "Reschedule",
+    confidenceScore: 9.9,
     duration: "7:48",
     recordingUrl: "https://example.com/recording3.mp3",
     transcriptUrl: "https://example.com/recording3.pdf",
   },
   {
     id: "4",
-    date: "2023-10-04",
-    invoice: "INV004",
-    status: "Transferred",
+    date: "2025/02/20",
+    category: "General Inquiry",
+    confidenceScore: 9.9,
     duration: "4:56",
     recordingUrl: "https://example.com/recording4.mp3",
     transcriptUrl: "https://example.com/recording4.pdf",
   },
   {
     id: "5",
-    date: "2023-10-05",
-    invoice: "INV005",
-    status: "Rescheduled",
+    date: "2025/02/20",
+    category: "Cancellation",
+    confidenceScore: 9.9,
     duration: "6:12",
     recordingUrl: "https://example.com/recording5.mp3",
     transcriptUrl: "https://example.com/recording5.pdf",
   },
 ];
-const RecordingCell = ({ recordingUrl, transcriptUrl, invoice }: { recordingUrl: string, transcriptUrl: string, invoice: string }) => {
+
+const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: string, transcriptUrl: string, id: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -159,7 +158,7 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, invoice }: { recordingUrl:
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center space-x-2">
               <FaFileArrowDown />
-              <span>{invoice}</span>
+              <span>{id}</span>
             </div>
             <Button variant="outline" size="sm" onClick={() => console.log("Download transcript:", transcriptUrl)}>
               <FaDownload />
@@ -173,30 +172,9 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, invoice }: { recordingUrl:
 
 export const columns: ColumnDef<CallRecording>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <div className="py-5 pl-4">
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      </div>
-    ),
-    cell: ({ row }) => (
-      <div className="pl-4">
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      </div>
-    ),
-    enableSorting: false,
-    enableHiding: false,
+    accessorKey: "id",
+    header: "Call ID",
+    cell: ({ row }) => <div>{row.getValue("id")}</div>,
   },
   {
     accessorKey: "date",
@@ -214,28 +192,23 @@ export const columns: ColumnDef<CallRecording>[] = [
     cell: ({ row }) => <div>{row.getValue("date")}</div>,
   },
   {
-    accessorKey: "invoice",
-    header: "Invoice",
-    cell: ({ row }) => <div>{row.getValue("invoice")}</div>,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "category",
+    header: "Category",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{row.getValue("category")}</div>
     ),
   },
   {
-    accessorKey: "duration",
-    header: "Duration",
-    cell: ({ row }) => <div>{row.getValue("duration")}</div>,
+    accessorKey: "confidenceScore",
+    header: "AI confidence score",
+    cell: ({ row }) => <div>{row.getValue("confidenceScore")}</div>,
   },
   {
     accessorKey: "recording",
     header: "Recording",
     cell: ({ row }) => <div className="py-5"><RecordingCell recordingUrl={row.original.recordingUrl} 
                                                             transcriptUrl={row.original.transcriptUrl}
-                                                            invoice = {row.original.invoice}/></div>,
+                                                            id = {row.original.id}/></div>,
   },
   {
     id: "actions",
@@ -272,7 +245,6 @@ export default function DataTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data: callRecordingsData,
@@ -284,53 +256,49 @@ export default function DataTable() {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: { sorting, columnFilters, columnVisibility, rowSelection },
+
+    state: { sorting, columnFilters, columnVisibility},
   });
 
-  // Function to handle downloading selected invoices
-  const handleDownloadSelected = () => {
-    const selectedRows = table.getFilteredSelectedRowModel().rows;
-    const selectedInvoices = selectedRows.map((row) => row.original.invoice);
-    console.log("Downloading selected invoices:", selectedInvoices);
-  };
 
   return (
-    <div id="call-history" className="w-full">
-      <p className="text-xl font-semibold md:text-2xl lg:text-3xl">
-        Call history
-      </p>
+    <div id="call-history" className="w-full bg-card rounded-lg p-10">
       <div className="flex flex-col justify-between py-4 md:flex-row">
-        <Input
-          placeholder="Filter invoices..."
-          value={(table.getColumn("invoice")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("invoice")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        {/* Dropdown to filter by status */}
+        <p className="text-m font-semibold md:text-2xl lg:text-3xl">
+          Call history and transcripts
+        </p>
+
         <div className="mt-2 flex flex-col gap-2 md:mt-0 md:flex-row lg:gap-4">
+          <Input
+            placeholder="Search"
+            value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("id")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+
+          {/* Dropdown to filter by category */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
                 className="w-fit justify-between bg-inherit"
               >
-                Filter by Status <FaChevronDown className="size-4" />
+                Category <FaChevronDown className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {["Booked", "Cancelled", "Transferred", "Rescheduled"].map(
+              {["Booking", "Cancellation", "General Inquiry", "Reschedule"].map(
                 (status) => (
                   <DropdownMenuCheckboxItem
                     key={status}
                     checked={
-                      table.getColumn("status")?.getFilterValue() === status
+                      table.getColumn("category")?.getFilterValue() === status
                     }
                     onCheckedChange={(value) =>
                       table
-                        .getColumn("status")
+                        .getColumn("category")
                         ?.setFilterValue(value ? status : undefined)
                     }
                   >
@@ -344,7 +312,7 @@ export default function DataTable() {
           <DatePickerWithRange />
         </div>
       </div>
-      <div className="rounded-md border">
+      <div>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -369,7 +337,6 @@ export default function DataTable() {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -395,21 +362,7 @@ export default function DataTable() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-
         <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleDownloadSelected}
-            disabled={table.getFilteredSelectedRowModel().rows.length === 0}
-          >
-            Download selected invoices
-          </Button>
-
           <Button
             variant="outline"
             size="sm"
