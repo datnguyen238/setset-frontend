@@ -22,7 +22,7 @@ import {
   FaPause,
   FaPlay,
 } from "react-icons/fa6";
-
+import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 import {
   Table,
   TableBody,
@@ -43,82 +44,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { CallRecording } from "@/lib/types";
 
-import { DatePickerWithRange } from "../ui/date-picker";
+import { CallRecording } from "@/lib/types";
 import { callRecordingsData } from "@/lib/sampleData";
 
-// Sample data for Call Recordings
-const callRecordingsData: CallRecording[] = [
-  {
-    id: "1",
-    date: "2025/02/10",
-    category: "Booking",
-    confidenceScore: 9.8,
-    duration: "0:18",
-    recordingUrl: "https://actions.google.com/sounds/v1/cartoon/rainstick_slow.ogg",
-    transcriptUrl: "https://example.com/recording1.pdf",
-  },
-  {
-    id: "2",
-    date: "2025/02/8",
-    category: "Cancellation",
-    confidenceScore: 9.9,
-    duration: "0:50",
-    recordingUrl: "https://actions.google.com/sounds/v1/ambiences/barnyard_with_animals.ogg",
-    transcriptUrl: "https://example.com/recording2.pdf",
-  },
-  {
-    id: "3",
-    date: "2025/02/18",
-    category: "Reschedule",
-    confidenceScore: 9.9,
-    duration: "7:48",
-    recordingUrl: "https://example.com/recording3.mp3",
-    transcriptUrl: "https://example.com/recording3.pdf",
-  },
-  {
-    id: "4",
-    date: "2025/02/20",
-    category: "General Inquiry",
-    confidenceScore: 9.9,
-    duration: "4:56",
-    recordingUrl: "https://example.com/recording4.mp3",
-    transcriptUrl: "https://example.com/recording4.pdf",
-  },
-  {
-    id: "5",
-    date: "2025/02/20",
-    category: "Cancellation",
-    confidenceScore: 9.9,
-    duration: "6:12",
-    recordingUrl: "https://example.com/recording5.mp3",
-    transcriptUrl: "https://example.com/recording5.pdf",
-  },
-];
-
 const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: string, transcriptUrl: string, id: string }) => {
-
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateProgress = () => {
-      setProgress((audio.currentTime / audio.duration) * 100);
-    };
-
-    audio.addEventListener("timeupdate", updateProgress);
-    return () => {
-      audio.removeEventListener("timeupdate", updateProgress);
-    };
-  }, []);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -132,56 +64,25 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
   };
 
   return (
-    <div className="flex w-full flex-col items-center space-x-4">
-      <Tabs
-        defaultValue="recording"
-        className={isMobile ? "w-[400px]" : "w-full"}
+    <div className="flex space-x-20 justify-end">
+      <Button variant="outline" size="sm" className="bg-sidebar-ring" onClick={togglePlay}>
+        {isPlaying ? <FaPause /> : <FaPlay />}
+        Listen
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        className="bg-foreground text-card"
+        onClick={() => console.log("Download transcript:", transcriptUrl)}
       >
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="recording">Recording</TabsTrigger>
-          <TabsTrigger value="transcript">Transcript</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="recording" className="w-full">
-          <div className="flex w-full items-center space-x-2">
-            <Button variant="outline" size="sm" onClick={togglePlay}>
-              {isPlaying ? <FaPause /> : <FaPlay />}
-            </Button>
-            <Progress value={progress} className="w-full" />
-            <audio
-              ref={audioRef}
-              src={recordingUrl}
-              onEnded={() => {
-                setIsPlaying(false);
-                setProgress(0);
-              }}
-            />
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => console.log("Download recording:", recordingUrl)}
-            >
-              <FaDownload />
-            </Button>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="transcript" className="w-full">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <FaFileArrowDown />
-              <span>{id}</span>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => console.log("Download transcript:", transcriptUrl)}
-            >
-              <FaDownload />
-            </Button>
-          </div>
-        </TabsContent>
-      </Tabs>
+        <FaFileArrowDown /> 
+        Transcript
+      </Button>
+      <audio
+        ref={audioRef}
+        src={recordingUrl}
+        onEnded={() => setIsPlaying(false)}
+      />
     </div>
   );
 };
@@ -220,47 +121,39 @@ export const columns: ColumnDef<CallRecording>[] = [
     cell: ({ row }) => <div>{row.getValue("confidenceScore")}</div>,
   },
   {
-    accessorKey: "recording",
-    header: "Recording",
-    cell: ({ row }) => <div className="py-5"><RecordingCell recordingUrl={row.original.recordingUrl} 
-                                                            transcriptUrl={row.original.transcriptUrl}
-                                                            id = {row.original.id}/></div>,
+    accessorKey: "duration",
+    header: "Duration",
+    cell: ({ row }) => <div>{row.getValue("duration")}</div>,
   },
   {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const recording = row.original;
-
-      return (
-        <div className="mt-auto flex size-full flex-col items-center pb-10">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="size-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <FaEllipsis />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(recording.id)}
-              >
-                Copy recording ID
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Report</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      );
-    },
-  },
+    accessorKey: "recording",
+    header: "",
+    cell: ({ row }) => <div className="py-3"><RecordingCell recordingUrl={row.original.recordingUrl} 
+                                                        transcriptUrl={row.original.transcriptUrl}
+                                                        id = {row.original.id}/></div>,
+  }
 ];
 
 export default function DataTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [durationFilter, setDurationFilter] = useState<number | null>(null);
+
+  const convertDurationToMinutes = (duration: string) => {
+    const [minutes, seconds] = duration.split(":").map(Number);
+    return minutes + seconds / 60;
+  };
+
+  const maxDuration = Math.max(...callRecordingsData.map(recording => convertDurationToMinutes(recording.duration)));
+
+  const isRowHidden = (duration: string) => {
+    if (durationFilter === null) {
+      return false; 
+    };
+    const durationInMinutes = convertDurationToMinutes(duration);
+    return durationInMinutes > durationFilter;
+  };
 
   const table = useReactTable({
     data: callRecordingsData,
@@ -272,13 +165,11 @@ export default function DataTable() {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-
-    state: { sorting, columnFilters, columnVisibility},
+    state: { sorting, columnFilters, columnVisibility },
   });
 
-
   return (
-    <div id="call-history" className="w-full bg-card rounded-lg p-10">
+    <div id="call-history" className="bg-card rounded-lg p-10">
       <div className="flex flex-col justify-between py-4 md:flex-row">
         <p className="text-m font-semibold md:text-2xl lg:text-3xl">
           Call history and transcripts
@@ -325,7 +216,32 @@ export default function DataTable() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <DatePickerWithRange />
+          {/* Slider for filtering by duration */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-fit justify-between bg-inherit"
+              >
+                Filter <Filter className="size-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <div className="p-5">
+                <div className="flex justify-between">
+                  <a className="mr-5">0</a>
+                  <Slider
+                  defaultValue={[0]}
+                  max={maxDuration}
+                  step={1}
+                  className="w-[200px]"
+                  onValueChange={(value) => setDurationFilter(value[0])}
+                  />
+                  <a className="ml-5">{Math.ceil(maxDuration)}</a>
+                </div>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       <div>
@@ -350,20 +266,26 @@ export default function DataTable() {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table.getRowModel().rows.map((row) => {
+                const duration = row.original.duration;
+                const isHidden = isRowHidden(duration);
+
+                return (
+                  <TableRow
+                    key={row.id}
+                    style={{ display: isHidden ? "none" : "table-row" }}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell
@@ -377,7 +299,7 @@ export default function DataTable() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end py-2">
         <div className="space-x-2">
           <Button
             variant="outline"

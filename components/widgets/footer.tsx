@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export function Footer() {
   return (
-    <Card className="mt-6 w-full">
+    <Card className="w-full">
       <CardContent className="flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2 text-sm text-muted-foreground">
           <p>© 2025 SetSet. All rights reserved.</p>
@@ -17,7 +17,7 @@ export function Footer() {
           <Link 
             href="#" 
             className="
-              flex items-center gap-2 rounded-md border 
+              flex items-center gap-2 rounded-md border `
               border-transparent
               bg-transparent text-muted-foreground
               outline-none
