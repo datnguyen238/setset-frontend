@@ -229,7 +229,7 @@ export default function DataTable() {
               <div className="p-5">
                 <div className="flex flex-col space-y-4">
                   <div className="flex justify-between">
-                    <span>Duration:</span>
+                    <span>Duration</span>
                   </div>
                   <DualRangeSlider
                     value={durationRange}
@@ -240,8 +240,8 @@ export default function DataTable() {
                     className="w-[200px]"
                   />
                   <div className="flex justify-between">
-                    <span>{durationRange[0]} min</span> 
-                    <span>{Math.ceil(durationRange[1])} min</span>
+                    <span className = "font-bold">{durationRange[0]} min</span> 
+                    <span className = "font-bold">{Math.ceil(durationRange[1])} min</span>
                   </div>
                 </div>
               </div>
