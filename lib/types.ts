@@ -44,8 +44,8 @@ export type AppointmentsData = {
 export type CallRecording = {
   id: string;
   date: string;
-  invoice: string;
-  status: "Booked" | "Cancelled" | "Transferred" | "Rescheduled";
+  category: "Booking" | "Cancellation" | "General Inquiry" | "Reschedule";
+  confidenceScore: number;
   duration: string;
   recordingUrl: string;
   transcriptUrl: string;
