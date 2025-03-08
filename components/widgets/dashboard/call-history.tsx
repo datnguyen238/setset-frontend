@@ -14,17 +14,15 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useRef, useState } from "react";
 import {
-  FaArrowsUpDown,
-  FaChevronDown,
-  FaDownload,
-  FaEllipsis,
-  FaFileArrowDown,
-  FaPause,
-  FaPlay,
-} from "react-icons/fa6";
-import { Filter } from "lucide-react";
+  ArrowDownUp,
+  ChevronDown,
+  File,
+  Filter,
+  Pause,
+  Play,
+} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -66,7 +64,7 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
   return (
     <div className="flex space-x-20 justify-end">
       <Button variant="outline" size="sm" className="bg-sidebar-ring" onClick={togglePlay}>
-        {isPlaying ? <FaPause /> : <FaPlay />}
+        {isPlaying ? <Pause /> : <Play />}
         Listen
       </Button>
       <Button
@@ -75,7 +73,7 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
         className="bg-foreground text-card"
         onClick={() => console.log("Download transcript:", transcriptUrl)}
       >
-        <FaFileArrowDown /> 
+        <File /> 
         Transcript
       </Button>
       <audio
@@ -102,7 +100,7 @@ export const columns: ColumnDef<CallRecording>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date
-          <FaArrowsUpDown className="size-4" />
+          <ArrowDownUp className="size-4" />
         </Button>
       );
     },
@@ -192,7 +190,7 @@ export default function DataTable() {
                 variant="outline"
                 className="w-fit justify-between bg-inherit"
               >
-                Category <FaChevronDown className="size-4" />
+                Category <ChevronDown className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
