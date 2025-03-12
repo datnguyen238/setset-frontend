@@ -24,7 +24,7 @@ function DashboardContent() {
         <ModeToggle />
       <div className="flex flex-row gap-4">
         <DatePickerWithRange />
-        <Button className="flex flex-row gap-2" onClick={handleReset}>
+        <Button className= "flex flex-row gap-2" onClick={handleReset}>
           <RefreshCw />
           <p>Reset Filters</p>
         </Button>

@@ -13,6 +13,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   ArrowDownUp,
   ChevronDown,
@@ -22,7 +23,6 @@ import {
 } from "lucide-react";
 import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -63,12 +63,12 @@ const RecordingCell = ({ recordingUrl, transcriptUrl, id }: { recordingUrl: stri
 
   return (
     <div className="flex space-x-20 justify-end">
-      <Button variant="outline" size="sm" className="bg-sidebar-ring" onClick={togglePlay}>
+      <Button variant="ghost" size="sm" className="bg-sidebar-ring text-black" onClick={togglePlay}>
         {isPlaying ? <Pause /> : <Play />}
         Listen
       </Button>
       <Button
-        variant="outline"
+        variant="ghost"
         size="sm"
         className="bg-foreground text-card"
         onClick={() => console.log("Download transcript:", transcriptUrl)}
@@ -148,6 +148,12 @@ export default function DataTable() {
     setDurationRange([0, maxDuration]);
   }, [maxDuration]);
 
+  const router = useRouter();
+  const handleViewMore = () => {
+    router.push("/recordings-and-transcripts");
+  }
+
+
   const isRowHidden = (duration: string) => {
     const durationInMinutes = convertDurationToMinutes(duration);
     return durationInMinutes < durationRange[0] || durationInMinutes > durationRange[1];
@@ -193,7 +199,7 @@ export default function DataTable() {
                 Category <ChevronDown className="size-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="bg-background">
               {["Booking", "Cancellation", "General Inquiry", "Reschedule"].map(
                 (status) => (
                   <DropdownMenuCheckboxItem
@@ -307,6 +313,7 @@ export default function DataTable() {
           <Button
             variant="outline"
             size="sm"
+            onClick={handleViewMore}
           >
             View more
           </Button>
