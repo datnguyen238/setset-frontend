@@ -414,7 +414,7 @@ export const callRecordingsData: CallRecording[] = [
     "category": "Booking",
     "confidenceScore": 9.5,
     "duration": "0:00",
-    "recordingUrl": "https://example.com/recording1.mp3",
+    "recordingUrl": "https://actions.google.com/sounds/v1/cartoon/rainstick_slow.ogg",
     "transcriptUrl": "https://example.com/recording1.pdf"
   },
   {

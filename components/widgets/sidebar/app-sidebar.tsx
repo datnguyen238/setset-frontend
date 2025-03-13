@@ -29,7 +29,7 @@ export function AppSidebar({
   items: sideBarPageProp[];
 }) {
   const pathname = usePathname();
-  const [currSelected, setCurrSelected] = useState("Dashboard");
+  const [currSelected, setCurrSelected] = useState(items[0].title);
   
   useEffect(() => {
     const pageInfo = getPageInfo(pathname, items);
