@@ -29,7 +29,8 @@ import {
   MetricsData,
   ReportData,
   sideBarPageProp,
-  ProfileData
+  ProfileData,
+  InvoiceData,
 } from "./types";
 
 export const metricsData: MetricsData = {
@@ -522,6 +523,9 @@ export const profile:ProfileData =
   email: "iCw3A@example.com",
 }
 
+
+
+
 export const reportsData: ReportData[] = [
   {
     id: "1",
@@ -664,7 +668,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "12",
-    date: "2025-02-12",
+    date: "2024-02-12",
     category: "General Inquiry",
     confidenceScore: 9.6,
     duration: "1:17",
@@ -682,7 +686,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "14",
-    date: "2025-02-14",
+    date: "2024-02-14",
     category: "Cancellation",
     confidenceScore: 9.8,
     duration: "3:31",
@@ -700,7 +704,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "16",
-    date: "2025-02-16",
+    date: "2024-02-16",
     category: "General Inquiry",
     confidenceScore: 9.5,
     duration: "5:45",
@@ -718,7 +722,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "18",
-    date: "2025-02-18",
+    date: "2024-02-18",
     category: "Cancellation",
     confidenceScore: 9.7,
     duration: "7:59",
@@ -736,7 +740,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "20",
-    date: "2025-02-20",
+    date: "2024-02-20",
     category: "General Inquiry",
     confidenceScore: 9.9,
     duration: "9:13",
@@ -754,7 +758,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "22",
-    date: "2025-02-22",
+    date: "2024-02-22",
     category: "Cancellation",
     confidenceScore: 9.6,
     duration: "1:27",
@@ -772,7 +776,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "24",
-    date: "2025-02-24",
+    date: "2024-02-24",
     category: "General Inquiry",
     confidenceScore: 9.8,
     duration: "3:41",
@@ -790,7 +794,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "26",
-    date: "2025-02-26",
+    date: "2024-02-26",
     category: "Cancellation",
     confidenceScore: 9.5,
     duration: "5:55",
@@ -1033,7 +1037,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "53",
-    date: "2025-02-25",
+    date: "2024-02-25",
     category: "Booking",
     confidenceScore: 9.7,
     duration: "2:04",
@@ -1213,7 +1217,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "73",
-    date: "2025-02-17",
+    date: "2024-02-17",
     category: "Booking",
     confidenceScore: 9.7,
     duration: "2:24",
@@ -1339,7 +1343,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "87",
-    date: "2025-02-03",
+    date: "2024-02-03",
     category: "Reschedule",
     confidenceScore: 9.6,
     duration: "6:02",
@@ -1420,7 +1424,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "96",
-    date: "2025-02-12",
+    date: "2024-02-12",
     category: "General Inquiry",
     confidenceScore: 9.5,
     duration: "5:05",
@@ -1438,7 +1442,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "98",
-    date: "2025-02-14",
+    date: "2024-02-14",
     category: "Cancellation",
     confidenceScore: 9.7,
     duration: "7:19",
@@ -1456,7 +1460,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "100",
-    date: "2025-02-16",
+    date: "2024-02-16",
     category: "General Inquiry",
     confidenceScore: 9.9,
     duration: "9:33",
@@ -1474,7 +1478,7 @@ export const callRecordingsData: CallRecording[] = [
   },
   {
     id: "102",
-    date: "2025-02-18",
+    date: "2024-02-18",
     category: "Cancellation",
     confidenceScore: 9.6,
     duration: "1:47",
@@ -1643,4 +1647,52 @@ export const callRecordingsData: CallRecording[] = [
     recordingUrl: "https://example.com/recording120.mp3",
     transcriptUrl: "https://example.com/recording120.pdf",
   },
+];
+
+
+export const businessInvoice: InvoiceData[] = [
+  // 2024 - 12 monthly + 1 annual
+  { id: "INV-2024-01", date: "2024-01-15", transcriptURL: "/transcripts/2024-01" },
+  { id: "INV-2024-02", date: "2024-02-15", transcriptURL: "/transcripts/2024-02" },
+  { id: "INV-2024-03", date: "2024-03-15", transcriptURL: "/transcripts/2024-03" },
+  { id: "INV-2024-04", date: "2024-04-15", transcriptURL: "/transcripts/2024-04" },
+  { id: "INV-2024-05", date: "2024-05-15", transcriptURL: "/transcripts/2024-05" },
+  { id: "INV-2024-06", date: "2024-06-15", transcriptURL: "/transcripts/2024-06" },
+  { id: "INV-2024-07", date: "2024-07-15", transcriptURL: "/transcripts/2024-07" },
+  { id: "INV-2024-08", date: "2024-08-15", transcriptURL: "/transcripts/2024-08" },
+  { id: "INV-2024-09", date: "2024-09-15", transcriptURL: "/transcripts/2024-09" },
+  { id: "INV-2024-10", date: "2024-10-15", transcriptURL: "/transcripts/2024-10" },
+  { id: "INV-2024-11", date: "2024-11-15", transcriptURL: "/transcripts/2024-11" },
+  { id: "INV-2024-12", date: "2024-12-15", transcriptURL: "/transcripts/2024-12" },
+  { id: "INV-ANNUAL-2024", date: "2024-12-31", transcriptURL: "/transcripts/annual-2024" },
+
+  // 2023 - 12 monthly + 1 annual
+  { id: "INV-2023-01", date: "2023-01-15", transcriptURL: "/transcripts/2023-01" },
+  { id: "INV-2023-02", date: "2023-02-15", transcriptURL: "/transcripts/2023-02" },
+  { id: "INV-2023-03", date: "2023-03-15", transcriptURL: "/transcripts/2023-03" },
+  { id: "INV-2023-04", date: "2023-04-15", transcriptURL: "/transcripts/2023-04" },
+  { id: "INV-2023-05", date: "2023-05-15", transcriptURL: "/transcripts/2023-05" },
+  { id: "INV-2023-06", date: "2023-06-15", transcriptURL: "/transcripts/2023-06" },
+  { id: "INV-2023-07", date: "2023-07-15", transcriptURL: "/transcripts/2023-07" },
+  { id: "INV-2023-08", date: "2023-08-15", transcriptURL: "/transcripts/2023-08" },
+  { id: "INV-2023-09", date: "2023-09-15", transcriptURL: "/transcripts/2023-09" },
+  { id: "INV-2023-10", date: "2023-10-15", transcriptURL: "/transcripts/2023-10" },
+  { id: "INV-2023-11", date: "2023-11-15", transcriptURL: "/transcripts/2023-11" },
+  { id: "INV-2023-12", date: "2023-12-15", transcriptURL: "/transcripts/2023-12" },
+  { id: "INV-ANNUAL-2023", date: "2023-12-31", transcriptURL: "/transcripts/annual-2023" },
+
+  // 2022 - 12 monthly + 1 annual
+  { id: "INV-2022-01", date: "2022-01-15", transcriptURL: "/transcripts/2022-01" },
+  { id: "INV-2022-02", date: "2022-02-15", transcriptURL: "/transcripts/2022-02" },
+  { id: "INV-2022-03", date: "2022-03-15", transcriptURL: "/transcripts/2022-03" },
+  { id: "INV-2022-04", date: "2022-04-15", transcriptURL: "/transcripts/2022-04" },
+  { id: "INV-2022-05", date: "2022-05-15", transcriptURL: "/transcripts/2022-05" },
+  { id: "INV-2022-06", date: "2022-06-15", transcriptURL: "/transcripts/2022-06" },
+  { id: "INV-2022-07", date: "2022-07-15", transcriptURL: "/transcripts/2022-07" },
+  { id: "INV-2022-08", date: "2022-08-15", transcriptURL: "/transcripts/2022-08" },
+  { id: "INV-2022-09", date: "2022-09-15", transcriptURL: "/transcripts/2022-09" },
+  { id: "INV-2022-10", date: "2022-10-15", transcriptURL: "/transcripts/2022-10" },
+  { id: "INV-2022-11", date: "2022-11-15", transcriptURL: "/transcripts/2022-11" },
+  { id: "INV-2022-12", date: "2022-12-15", transcriptURL: "/transcripts/2022-12" },
+  { id: "INV-ANNUAL-2022", date: "2022-12-31", transcriptURL: "/transcripts/annual-2022" }
 ];

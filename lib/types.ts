@@ -120,3 +120,9 @@ export interface ProfileData
   category:string;
   email:string;
 }
+
+export interface InvoiceData {
+  id: string;
+  date: string;
+  transcriptURL: string;
+}

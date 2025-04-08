@@ -66,7 +66,7 @@ const RecordingCell = ({
       <Button
         variant="ghost"
         size="sm"
-        className="bg-sidebar-ring text-black"
+        className="bg-[#2a870b] shadow-sm hover:bg-[#2a870b]/60"
         // onClick={togglePlay}
       >
         {isPlaying ? <Pause /> : <Play />}
@@ -192,13 +192,13 @@ export default function DataTable() {
   });
 
   return (
-    <div id="call-history" className="rounded-lg bg-card p-10">
+    <div className="rounded-lg bg-card shadow-md p-6 shadow-primary-gray">
       <div
-        className={`flex flex-col justify-between md:flex-row ${isMobile ? "space-y-4" : ""}`}
+        className={`flex flex-col justify-between md:flex-row py-4 ${isMobile ? "space-y-4" : ""}`}
       >
-        <p className="text-base font-semibold md:text-2xl lg:text-3xl">
+        <div className="text-base md:text-2xl lg:text-3xl">
           Call history and transcripts
-        </p>
+        </div>
 
         <div
           className={`mt-2 flex flex-col gap-2 md:mt-0 md:flex-row lg:gap-4 ${isMobile ? "space-y-4" : ""}`}
