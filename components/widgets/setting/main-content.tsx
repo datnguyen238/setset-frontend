@@ -53,11 +53,8 @@ export function MainContent({
             key={item.title}
             className={`w-full p-4`}
           >
-            {item.url==="Invoices" && (
-              <>
-                {/* <Invoices plan="yearly" /> */}
-                <Invoices plan="monthly" />
-              </>
+            {item.url==="Profile" && (
+              <p>{item.title}</p>
             )}
             
           </div>
