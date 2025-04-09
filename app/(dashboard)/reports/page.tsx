@@ -42,17 +42,21 @@ export default function Reports({
                     <div className="flex w-full flex-col gap-4 md:flex-row">
                       <div className="flex w-full flex-col gap-2">
                         <div className="flex items-center justify-between">
-                          <p className="font-semibold text-xl">{report.title}</p>
+                          <p className="text-xl font-semibold">
+                            {report.title}
+                          </p>
                           <p className="text-xs text-gray-400">
                             {report.category}
                           </p>
                         </div>
-                        <p className="text-base text-white/70">{report.description}</p>
+                        <p className="text-base text-white/70">
+                          {report.description}
+                        </p>
                         <p className="text-xs text-gray-500">
                           Date: {report.date}
                         </p>
                       </div>
-                    </div>    
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -69,12 +73,16 @@ export default function Reports({
                     <div className="flex w-full flex-col gap-4 md:flex-row">
                       <div className="flex w-full flex-col gap-2">
                         <div className="flex items-center justify-between">
-                          <p className="font-semibold text-xl">{report.title}</p>
+                          <p className="text-xl font-semibold">
+                            {report.title}
+                          </p>
                           <p className="text-xs text-gray-400">
                             {report.category}
                           </p>
                         </div>
-                        <p className="text-base text-white/70">{report.description}</p>
+                        <p className="text-base text-white/70">
+                          {report.description}
+                        </p>
                         <p className="text-xs text-gray-500">
                           Date: {report.date}
                         </p>
