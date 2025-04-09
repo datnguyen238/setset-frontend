@@ -1,6 +1,5 @@
 "use client"
 import { LoginForm } from "@/components/login-form"
-import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile"
 
@@ -13,12 +12,7 @@ export default function LoginPage() {
         <CardHeader className="pb-3 pt-11">
           <a href="#" className="flex items-center gap-2 self-center text-lg font-medium"> 
             <div className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <Image 
-                src="/images/logo.png" 
-                width={100}
-                height={100}
-                className="size-7" 
-                alt="Logo" />
+              <img src="/images/logo.png" className="size-7" alt="Logo" />
             </div>
             Setset
           </a>

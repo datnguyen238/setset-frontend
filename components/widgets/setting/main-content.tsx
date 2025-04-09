@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 
 import { settingMenu } from "@/lib/sampleData";
-import { Invoices } from "../invoices/invoices";
-
 export function MainContent({
   changeView,
 }: {
@@ -51,19 +49,12 @@ export function MainContent({
           <div
             id={item.url}
             key={item.title}
-            className={`w-full p-4`}
+            className={`m-20 h-[400px] w-[90%] bg-primary py-20 text-3xl text-primary ${viewSection === item.url ? "!bg-muted-foreground text-foreground" : ""}`}
           >
-            {item.url==="Invoices" && (
-              <>
-                {/* <Invoices plan="yearly" /> */}
-                <Invoices plan="monthly" />
-              </>
-            )}
-            
+            {item.title}
           </div>
         ))}
       </div>
     </div>
   );
 }
-
