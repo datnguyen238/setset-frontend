@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { settingMenu } from "@/lib/sampleData";
+import { settingMenu } from "@/lib/sample-data";
 import { Invoices } from "../invoices/invoices";
 
 export function MainContent({

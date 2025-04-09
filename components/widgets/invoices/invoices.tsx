@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { businessInvoice } from "@/lib/sampleData";
+import { businessInvoice } from "@/lib/sample-data";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const ITEMS_PER_PAGE = 12;

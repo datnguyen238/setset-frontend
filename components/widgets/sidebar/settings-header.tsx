@@ -7,7 +7,7 @@ import Notification from "@/components/widgets/sidebar/notification";
 import { ChangeTheme } from "@/components/widgets/theme_Toggle";
 import { SettingsHeader } from "@/lib/settings";
 import { ProfilePicture } from "./Profile";
-import {profile} from "@/lib/sampleData"
+import {profile} from "@/lib/sample-data"
 
 
 const SidebarIcon = () => {

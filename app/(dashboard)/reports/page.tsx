@@ -2,7 +2,7 @@ import { Check, Construction } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { reportsData } from "@/lib/sampleData";
+import { reportsData } from "@/lib/sample-data";
 import { containerClassname, ReportData } from "@/lib/types";
 
 export default function Reports({

@@ -16,7 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { initialNotifications } from "@/lib/sampleData";
+import { initialNotifications } from "@/lib/sample-data";
 import { notificationObject } from "@/lib/types";
 
 export function NotificationList({

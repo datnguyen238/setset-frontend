@@ -10,7 +10,7 @@ import SettingIcon from "@/lib/settings";
 import { SettingsHeader } from "@/lib/settings";
 import { sideBarPageProp } from "@/lib/types";
 import { ProfilePicture } from "./Profile";
-import {profile} from "@/lib/sampleData"
+import {profile} from "@/lib/sample-data"
 
 
 

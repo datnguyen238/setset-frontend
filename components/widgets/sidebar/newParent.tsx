@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/widgets/sidebar/app-sidebar";
 import { HeaderBar } from "@/components/widgets/sidebar/headerBar";
-import { items } from "@/lib/sampleData";
+import { items } from "@/lib/sample-data";
 import { sideBarPageProp } from "@/lib/types";
 
 interface NewParentProps {
