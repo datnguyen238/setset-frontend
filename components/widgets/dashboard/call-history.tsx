@@ -192,11 +192,11 @@ export default function DataTable() {
   });
 
   return (
-    <div id="call-history" className="rounded-lg bg-card p-10">
+    <div id="call-history" className="rounded-lg bg-card p-6">
       <div
         className={`flex flex-col justify-between md:flex-row ${isMobile ? "space-y-4" : ""}`}
       >
-        <p className="text-base font-semibold md:text-2xl lg:text-3xl">
+        <p className="text-base  md:text-2xl lg:text-3xl pb-10">
           Call history and transcripts
         </p>
 

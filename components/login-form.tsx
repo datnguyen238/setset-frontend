@@ -74,7 +74,7 @@ export function LoginForm({
           <Input
             id="email"
             type="email"
-            placeholder="m@example.com"
+            placeholder="username@example.com"
             required
             value={formData.email}
             onChange={handleChange}
@@ -109,7 +109,7 @@ export function LoginForm({
           </div>
           
           {isPassword && passwordError && (
-            <p className="text-sm font-bold text-red-300">
+            <p className="text-sm text-red-600">
               {passwordError}
             </p>
           )}
@@ -117,7 +117,7 @@ export function LoginForm({
         
         <Button 
           type="submit" 
-          className="w-full bg-white text-black hover:border hover:border-white hover:bg-card hover:text-white"
+          className="w-full bg-white text-black hover:border hover:border-foreground hover:bg-background hover:text-foreground"
           disabled={!!passwordError && isPassword}
         >
           Login
@@ -134,7 +134,10 @@ export function LoginForm({
           </div>
         </div>
         
-        <Button variant="outline" type="button" className="w-full bg-white text-black hover:text-white">
+        <Button 
+          variant="outline" 
+          type="button" 
+          className="w-full bg-white text-black hover:border hover:border-foreground hover:bg-background hover:text-foreground">
           <svg
             className="mr-2 size-4"
             xmlns="http://www.w3.org/2000/svg"

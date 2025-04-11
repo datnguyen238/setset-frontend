@@ -120,7 +120,7 @@ export function Invoices({ plan }: { plan: BillingPlan }) {
   };
 
   return ( 
-    <div className="rounded-lg bg-card p-6 shadow-md shadow-primary-gray">
+    <div id="Invoices" className="rounded-lg bg-card p-6 shadow-md shadow-primary-gray">
       <div
         className={`flex flex-col justify-between md:flex-row py-4 ${isMobile ? "space-y-4" : ""}`}
       >
