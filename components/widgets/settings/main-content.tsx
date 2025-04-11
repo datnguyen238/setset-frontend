@@ -51,7 +51,7 @@ export function MainContent({
         <ProfilePage />
         <Password />
         <Invoices plan="monthly" />
-        <Invoices plan="yearly" />
+        {/* <Invoices plan="yearly" /> */}
         
         {settingMenu.map((item) => (
           <div
