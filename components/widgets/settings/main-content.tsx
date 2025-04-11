@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Password } from "./password-section";
+import { useEffect } from "react";
 
 import { settingMenu } from "@/lib/sample-data";
-import { Invoices } from "@/components/widgets/invoices/invoices";
+
+import { Invoices } from "./invoices";
+import { Password } from "./password-section";
 import { ProfilePage } from "./profile/profile";
 export function MainContent({
   changeView,
@@ -48,7 +49,7 @@ export function MainContent({
     <div className="flex flex-col items-start">
       <div className="flex w-full flex-col gap-96">
         <ProfilePage />
-        <Password/>
+        <Password />
         <Invoices plan="monthly" />
         <Invoices plan="yearly" />
         
