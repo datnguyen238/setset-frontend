@@ -1866,4 +1866,12 @@ export const cardData: CardData[] = [
     exp_month: 6,
     exp_year: 2024,
   },
+  {
+    id: "card_123",
+    last4: "6779",  
+    brand: "Visa",
+    name: "John Doe",
+    exp_month: 12,
+    exp_year: 2029,
+  },
 ];
