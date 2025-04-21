@@ -1848,3 +1848,22 @@ export const businessInvoice: InvoiceData[] = [
     transcriptURL: "/transcripts/annual-2022",
   },
 ];
+
+export const cardData: CardData[] = [
+  {
+    id: "card_456",
+    last4: "5555",
+    brand: "Mastercard",
+    name: "Jane Smith",
+    exp_month: 3,
+    exp_year: 2026,
+  },
+  {
+    id: "card_789",
+    last4: "1881",  
+    brand: "American Express",
+    name: "Alex Johnson",
+    exp_month: 6,
+    exp_year: 2024,
+  },
+];

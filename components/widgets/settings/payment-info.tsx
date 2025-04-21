@@ -1,13 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useState } from "react";
-import { cardData } from "@/lib/sample-data";
-import { useToast } from "@/hooks/use-toast";
 import { CreditCard, Trash2 } from "lucide-react";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { Header,paymentCard } from "@/lib/constant";
+import { cardData } from "@/lib/sample-data";
+import { cn } from "@/lib/utils";
 
 export function PaymentInfo() {
   const { toast } = useToast();
@@ -42,10 +45,10 @@ export function PaymentInfo() {
   const [cardToDelete, setCardToDelete] = useState<string | null>(null);
 
   const cardTypes = [
-    { value: "visa", label: "Visa", icon: <CreditCard className="h-4 w-4" /> },
-    { value: "mastercard", label: "Mastercard", icon: <CreditCard className="h-4 w-4" /> },
-    { value: "amex", label: "American Express", icon: <CreditCard className="h-4 w-4" /> },
-    { value: "other", label: "Other", icon: <CreditCard className="h-4 w-4" /> },
+    { value: "visa", label: "Visa", icon: <CreditCard className="size-4" /> },
+    { value: "mastercard", label: "Mastercard", icon: <CreditCard className="size-4" /> },
+    { value: "amex", label: "American Express", icon: <CreditCard className="size-4" /> },
+    { value: "other", label: "Other", icon: <CreditCard className="size-4" /> },
   ];
 
   const countries = [
@@ -198,9 +201,9 @@ export function PaymentInfo() {
   };
 
   return (
-    <Card id="Card-Information">
-      <CardHeader>
-        <CardTitle>Payment Information</CardTitle>
+    <Card id="Card-Information" className={paymentCard}>
+      <CardHeader className={cn(Header)}>
+        Payment Information
       </CardHeader>
       <CardContent>
         {!showAddForm ? (
@@ -213,8 +216,8 @@ export function PaymentInfo() {
               {cards.map((card) => (
                 <div 
                   key={card.id}
-                  className={`p-4 border rounded-lg flex items-start space-x-3 relative group
-                  ${selectedCardId === card.id ? "bg-muted border-foreground" : "bg-transparent border-foreground/50"}`}
+                  className={`group relative flex items-start space-x-3 rounded-lg border p-4
+                  ${selectedCardId === card.id ? "border-foreground bg-muted" : "border-foreground/50 bg-transparent"}`}
                 >
                   <RadioGroupItem value={card.id} id={card.id} className="mt-1" />
                   <div className="flex-1">
@@ -222,20 +225,20 @@ export function PaymentInfo() {
                       <span className="font-medium">{card.brand}</span>
                       <span className="text-muted-foreground">•••• •••• •••• {card.last4}</span>
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 mt-1 text-sm text-muted-foreground">
+                    <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                       <span>{card.name}</span>
                       <span>•</span>
-                      <span>Expires {card.exp_month.toString().padStart(2, '0')}/{card.exp_year.toString().slice(-2)}</span>
+                      <span>Expires {card.exp_month.toString().padStart(2, "0")}/{card.exp_year.toString().slice(-2)}</span>
                     </div>
                   </div>
                   <button
-                    className="absolute right-3 top-3 p-1 rounded-full text-muted-foreground opacity-0 group-hover:opacity-100 hover:bg-muted hover:text-red-500 transition-opacity"
+                    className="absolute right-3 top-3 rounded-full p-1 text-muted-foreground opacity-0 transition-opacity hover:bg-muted hover:text-red-500 group-hover:opacity-100"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDeleteCard(card.id);
                     }}
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="size-4" />
                   </button>
                 </div>
               ))}
@@ -244,7 +247,7 @@ export function PaymentInfo() {
             <Button
               variant="ghost" 
               onClick={() => setShowAddForm(true)}
-              className="bg-[#2a870b] shadow-sm hover:bg-[#2a870b]/60 ml-auto mt-4 flex items-center gap-2"
+              className="ml-auto mt-4 flex items-center gap-2 bg-[#2a870b] shadow-sm hover:bg-[#2a870b]/60"
             >
               Add payment method
             </Button>
@@ -330,7 +333,7 @@ export function PaymentInfo() {
                 <SelectContent
                   position="popper"  
                   sideOffset={4}     
-                  className="w-[var(--radix-select-trigger-width)] max-h-[250px] overflow-y-auto"
+                  className="max-h-[250px] w-[var(--radix-select-trigger-width)] overflow-y-auto"
                 >
                   {countries.map((country) => (
                     <SelectItem key={country.value} value={country.value}>
@@ -418,7 +421,7 @@ export function PaymentInfo() {
               variant="destructive" 
               onClick={confirmDelete}
             >
-              <Trash2 className="mr-2 h-4 w-4" />
+              <Trash2 className="mr-2 size-4" />
               Delete Card
             </Button>
           </DialogFooter>
