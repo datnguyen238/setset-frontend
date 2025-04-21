@@ -30,6 +30,7 @@ import {
   BusinessInfo,
   BusinessStat,
   CallRecording,
+  CardData,
   FaqData,
   InvoiceData,
   MetricsData,
@@ -543,7 +544,7 @@ export const reportsData: ReportData[] = [
     description:
       "The AI provided an incorrect response to a customer query regarding account balance.",
     date: "2023-10-02",
-    category: "Other for now",
+    category: "Other",
     status: "Resolved",
   },
   {
@@ -552,7 +553,7 @@ export const reportsData: ReportData[] = [
     description:
       "The AI system was down for 2 hours, causing delays in customer service.",
     date: "2023-10-03",
-    category: "Other for now",
+    category: "Other",
     status: "Pending",
   },
   {
@@ -1695,4 +1696,31 @@ export const businessInvoice: InvoiceData[] = [
   { id: "INV-2022-11", date: "2022-11-15", transcriptURL: "/transcripts/2022-11" },
   { id: "INV-2022-12", date: "2022-12-15", transcriptURL: "/transcripts/2022-12" },
   { id: "INV-ANNUAL-2022", date: "2022-12-31", transcriptURL: "/transcripts/annual-2022" }
+];
+
+export const cardData: CardData[] = [
+  {
+    id: "card_1",
+    last4: "4242",
+    brand: "Visa",
+    name: "John Doe",
+    exp_month: 12,
+    exp_year: 2025,
+  },
+  {
+    id: "card_2",
+    last4: "5555",
+    brand: "Mastercard",
+    name: "John Doe",
+    exp_month: 3,
+    exp_year: 2024,
+  },
+  {
+    id: "card_3",
+    last4: "3782",
+    brand: "American Express",
+    name: "John Doe",
+    exp_month: 6,
+    exp_year: 2026,
+  },
 ];

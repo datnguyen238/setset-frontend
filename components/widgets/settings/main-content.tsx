@@ -7,6 +7,7 @@ import { settingMenu } from "@/lib/sample-data";
 import { Invoices } from "./invoices";
 import { Password } from "./password-section";
 import { ProfilePage } from "./profile/profile";
+import { PaymentInfo } from "./payment-info";
 export function MainContent({
   changeView,
 }: {
@@ -52,15 +53,16 @@ export function MainContent({
         <Password />
         <Invoices plan="monthly" />
         <Invoices plan="yearly" />
+        <PaymentInfo />
         
         {settingMenu.map((item) => (
           <div
-            id={item.url}
-            key={item.title}
-            className={`w-full p-4`}
+          id={item.url}
+          key={item.title}
+          className={`w-full p-4`}
           >
-            {item.url !== "Profile" && (
-              <p>{item.title}</p>
+          {item.url !== "Profile" && (
+            <p>{item.title}</p>
             )}
           </div>
         ))}
